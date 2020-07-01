@@ -1,14 +1,30 @@
-package com.flolabs.notification.entity;
+package com.flolabs.notification.domain;
 
-//@Table("user_notification")
 public class UserNotificationEntity {
 
-//	@Id
-	private long msg_id;
+	private String sender;
+	
+	private String time;
 	
 	private String user_name;
 	
 	private String event_string;
+	
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
 
 	public String getUserName() {
 		return user_name;

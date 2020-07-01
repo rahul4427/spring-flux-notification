@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.flolabs.notification.entity.UserNotificationEntity;
+import com.flolabs.notification.domain.UserNotificationEntity;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponses;
