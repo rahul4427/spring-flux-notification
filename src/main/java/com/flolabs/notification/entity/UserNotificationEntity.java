@@ -1,39 +1,29 @@
 package com.flolabs.notification.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-import io.github.classgraph.json.Id;
-
-@Entity
-@Table(name = "user_notification")
+//@Table("user_notification")
 public class UserNotificationEntity {
 
-	@Id
-	@Column(name = "msg_pkey")
-	private long msgId;
+//	@Id
+	private long msg_id;
 	
-	@Column(name = "user_name")
-	private String userName;
+	private String user_name;
 	
-	@Column(name = "event_string")
-	private String eventString;
+	private String event_string;
 
 	public String getUserName() {
-		return userName;
+		return user_name;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.user_name = userName;
 	}
 
 	public String getEventString() {
-		return eventString;
+		return event_string;
 	}
 
 	public void setEventString(String eventString) {
-		this.eventString = eventString;
+		this.event_string = eventString;
 	}
 	
 	
