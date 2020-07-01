@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.flolabs.notification.domain.SSEDomain;
 import com.flolabs.notification.domain.UserNotificationEntity;
 import com.flolabs.notification.service.MessageService;
 import com.flolabs.notification.utils.ActivePublishers;
@@ -20,7 +21,11 @@ public class MessageServiceImpl implements MessageService{
 	public void sendMessage(UserNotificationEntity request) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 		request.setTime(dtf.format(LocalDateTime.now()));
-		sinks.getProcessor(request.getUserName()).forEach(sink->sink.next(request));;		
+		
+		SSEDomain domain = sinks.getProcessor(request.getUserName());
+		if(domain!=null) {
+			domain.getSink().next(request);
+		}	
 	}
 
 }
