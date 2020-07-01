@@ -17,6 +17,8 @@ public class MessageServiceImpl implements MessageService{
 	
 	@Override
 	public void sendMessage(UserNotificationEntity request) {
+		request.setUserName("aa");
+		request.setEventString("first one");
 		FluxSink<UserNotificationEntity> sink = sinks.getProcessor(request.getUserName());
 		sink.next(request);
 		
