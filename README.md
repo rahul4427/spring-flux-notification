@@ -5,9 +5,13 @@ This Application allows a user to receive any notification generated at any even
 ## Thought process and problem solving
 I wanted to create a system where-in a user can receive his/her updates without continous polling or timely polling. My requirement 
 was to establish a continous connection where the server can send data to the client whenever it wants. I went ahead checking for reactive programming
-and came accross WebFlux, WebSink and publisher. Then I came up with a plan to to create different publishers for different active users. Create a new publisher and sink
+and came accross WebFlux, WebSink and publisher. Then I came up with a plan to create different publishers for different active users.
+</br></br>
+Create a new publisher and sink
 if a user just came active and return the already assigned publisher if the user is accessing in multiple places and at last closing the publisher and sink when
-all the subscribers are closed. Here we can have as many different users having there tabs opened and receive there personal notifications. I have implemented a basic
+all the subscribers are closed. Here we can have as many different users having there tabs opened and receive there personal notifications.
+</br></br>
+I have implemented a basic
 UI for getting the notification and have used swagger for documentation and also acting as our notification creator(for sending message/notification to desired user) .
 </br>
 
