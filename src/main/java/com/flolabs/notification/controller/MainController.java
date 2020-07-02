@@ -1,4 +1,4 @@
-package com.flolabs.notification.api;
+package com.flolabs.notification.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

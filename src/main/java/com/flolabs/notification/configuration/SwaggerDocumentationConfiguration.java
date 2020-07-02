@@ -4,6 +4,7 @@ import org.reactivestreams.Publisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import io.swagger.annotations.Api;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -25,7 +26,8 @@ public class SwaggerDocumentationConfiguration {
 	public Docket customImplementation() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				 .genericModelSubstitutes(Mono.class, Flux.class, Publisher.class).select()
-				.apis(RequestHandlerSelectors.any()).build().apiInfo(apiInfo())
-				.tags(new Tag("Notification","notify"));
+				.apis(RequestHandlerSelectors.withClassAnnotation(Api.class)).build().apiInfo(apiInfo())
+				.tags(new Tag("Notification","Api's related to user's notifications"),
+						new Tag("Notify","Api's to send msg to any user"));
 	}
 }

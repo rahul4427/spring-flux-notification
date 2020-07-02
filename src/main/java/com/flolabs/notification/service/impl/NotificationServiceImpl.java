@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Service;
 
+import com.flolabs.notification.domain.SSEDomain;
 import com.flolabs.notification.domain.UserNotificationEntity;
 import com.flolabs.notification.service.NotificationService;
 import com.flolabs.notification.utils.ActivePublishers;
@@ -18,20 +19,25 @@ import reactor.core.publisher.FluxSink;
 public class NotificationServiceImpl implements NotificationService{
 
 	@Autowired
-	ActivePublishers sinks;
+	ActivePublishers publisher;
 	
 	@Override
 	public Flux<ServerSentEvent<UserNotificationEntity>> subscribeUser(String user) {
+		SSEDomain domain = publisher.getProcessor(user);
+		if(domain!=null) {
+			return domain.getSubscribableProcessor();
+		}
 		FluxProcessor<UserNotificationEntity,UserNotificationEntity> processor = EmitterProcessor.create();
 		FluxSink<UserNotificationEntity> sink =  processor.sink();
-		sinks.addProcessor(user, sink);
+		Flux<ServerSentEvent<UserNotificationEntity>> subscribableProcessor= processor.map(e -> ServerSentEvent.builder(e).build());
+		publisher.addProcessor(user, new SSEDomain(subscribableProcessor, sink));
 		sink.onCancel(new Disposable() {
 			@Override
 			public void dispose() {
-				sinks.removeSink(user,sink);	
+				publisher.removeSSEDomain(user);	
 			}
 		});
-		return processor.map(e -> ServerSentEvent.builder(e).build());
+		return subscribableProcessor;
 	}
 
 }

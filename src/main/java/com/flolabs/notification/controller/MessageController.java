@@ -8,7 +8,10 @@ import com.flolabs.notification.api.MessageApi;
 import com.flolabs.notification.domain.UserNotificationEntity;
 import com.flolabs.notification.service.MessageService;
 
+import io.swagger.annotations.Api;
+
 @RestController
+@Api(tags = "Notify")
 public class MessageController implements MessageApi{
 
 	@Autowired
