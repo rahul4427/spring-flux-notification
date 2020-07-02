@@ -8,10 +8,12 @@ import com.flolabs.notification.api.NotificationApi;
 import com.flolabs.notification.domain.UserNotificationEntity;
 import com.flolabs.notification.service.NotificationService;
 
+import io.swagger.annotations.Api;
 import reactor.core.publisher.Flux;
 
 
 @RestController
+@Api(tags = "Notification")
 public class NotificationController implements NotificationApi{
 
 	@Autowired
